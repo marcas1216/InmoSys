@@ -1,23 +1,42 @@
+using InmoSys.Extensions;
+using InmoSys.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
 
+// Configs (Leídos desde appsettings)
+builder.Services.AddOptions();
+
+// CORS
+builder.Services.AddInmoCors(builder.Configuration);
+
+// JWT Auth
+builder.Services.AddInmoJwtAuthentication(builder.Configuration);
+
+// Controllers 
 builder.Services.AddControllers();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Swagger (se registra pero se controla si se expone en runtime)
+builder.Services.AddInmoSwagger(builder.Configuration);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
+// Middleware pipeline
 app.UseHttpsRedirection();
 
+// Custom request logging middleware (ejemplo)
+app.UseMiddleware<RequestLoggingMiddleware>();
+
+// CORS
+app.UseCors("InmoSysCors");
+
+// AuthN & AuthZ
+app.UseAuthentication();
 app.UseAuthorization();
 
+// Swagger
+app.UseInmoSwagger(builder.Configuration, app.Environment);
+
+// Map controllers
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();
