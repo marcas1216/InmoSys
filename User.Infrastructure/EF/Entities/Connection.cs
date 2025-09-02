@@ -8,7 +8,7 @@ namespace User.Infrastructure.EF.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("old")]
+        [Column("cId")]
         public int Id { get; set; }
 
         [Required]

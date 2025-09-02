@@ -27,6 +27,20 @@ builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<InmoSysCoreContext>();
+    if (db.Database.CanConnect())
+    {
+        Console.WriteLine("Conexión a InmoSysCore establecida correctamente.");
+    }
+    else
+    {
+        Console.WriteLine("No se pudo conectar a la base de datos InmoSysCore.");
+    }
+}
+
+
 // Middleware pipeline
 app.UseHttpsRedirection();
 
