@@ -23,6 +23,8 @@ builder.Services.AddControllers();
 // Swagger (se registra pero se controla si se expone en runtime)
 builder.Services.AddInmoSwagger(builder.Configuration);
 
+builder.Services.AddInfrastructure();
+
 var app = builder.Build();
 
 // Middleware pipeline

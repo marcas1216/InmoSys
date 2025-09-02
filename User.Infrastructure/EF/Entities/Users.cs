@@ -14,7 +14,8 @@ namespace User.Infrastructure.EF.Entities
         [Required]
         [Column("uEmail")]
         [MaxLength(300)]
-        [EmailAddress]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+        ErrorMessage = "El formato del email no es válido.")]
         public string? Email { get; set; }
 
         [Required]

@@ -1,0 +1,15 @@
+﻿using User.Infrastructure.EF.Interfaces;
+using User.Infrastructure.EF.Repositories;
+
+namespace InmoSys.Extensions
+{
+    public static class ServiceCollectionExtensions
+    {
+        public  static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        {           
+            services.AddScoped<IUserRepository, UserRepository>();            
+
+            return services;
+        }
+    }
+}
