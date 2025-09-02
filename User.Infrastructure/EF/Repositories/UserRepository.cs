@@ -47,7 +47,7 @@ namespace User.Infrastructure.EF.Repositories
                 };
             }
 
-            string hashPassword = PasswordHelper.HashPassword(request.Password);
+            string hashPassword = SecurityHelper.Hash(request.Password);
 
             if (hashPassword != user.Password)
             {

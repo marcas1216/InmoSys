@@ -40,7 +40,7 @@ namespace User.Test
             {
                 Id = 1,
                 Email = "test@test.com",
-                Password = PasswordHelper.HashPassword("123456")
+                Password = SecurityHelper.Hash("123456")
             });
             _context.SaveChanges();
         }
@@ -89,7 +89,7 @@ namespace User.Test
             var result = await service.LoginAsync(new UserLoginRequest
             {
                 Email = "test@test.com",
-                Password = PasswordHelper.HashPassword("wrongpass") 
+                Password = SecurityHelper.Hash("wrongpass") 
             });
 
             Assert.IsFalse(result.Success);
