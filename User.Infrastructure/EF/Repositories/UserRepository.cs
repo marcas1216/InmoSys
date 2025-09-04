@@ -16,77 +16,91 @@ namespace User.Infrastructure.EF.Repositories
     {        
         private readonly IConfiguration _config;
         private readonly InmoSysCoreContext _context;
-
+        
         public UserRepository(IConfiguration config
-            ,InmoSysCoreContext context
-            )
+            ,InmoSysCoreContext context)
+
         {          
             _config = config;
-            _context = context;
+            _context = context;               
         }
 
         public async Task<LoginResult> LoginAsync(UserLoginRequest request)
         {
-            if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+            try
+            {
+                if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+                {
+                    return new LoginResult
+                    {
+                        Success = false,
+                        Message = "El correo y la contraseña son obligatorios."
+                    };
+                }
+
+                var user = await _context.Users
+                          .AsNoTracking()
+                          .FirstOrDefaultAsync(u => u.Email == request.Email);
+
+                if (user == null)
+                {
+                    return new LoginResult
+                    {
+                        Success = false,
+                        Message = "El usuario no existe."
+                    };
+                }
+
+                string hashPassword = SecurityHelper.Hash(request.Password);
+
+                if (hashPassword != user.Password)
+                {
+                    return new LoginResult
+                    {
+                        Success = false,
+                        Message = "La contraseña es incorrecta."
+                    };
+                }
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(_config["Jwt:Secret"]);
+
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new[]
+                    {
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim("UserId", user.Id.ToString())
+                     }),
+                    Expires = DateTime.UtcNow.AddMinutes(
+                        Convert.ToDouble(_config["Jwt:TokenExpirationMinutes"])
+                    ),
+                    Issuer = _config["Jwt:Issuer"],
+                    Audience = _config["Jwt:Audience"],
+                    SigningCredentials = new SigningCredentials(
+                        new SymmetricSecurityKey(key),
+                        SecurityAlgorithms.HmacSha256Signature
+                    )
+                };
+
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                return new LoginResult
+                {
+                    Success = true,
+                    Message = "Login exitoso.",
+                    Token = tokenHandler.WriteToken(token)
+                };
+            }
+            catch (Exception ex)
             {
                 return new LoginResult
                 {
                     Success = false,
-                    Message = "El correo y la contraseña son obligatorios."
+                    Message = $"Error en el proceso de login: {ex.Message}",
+                    Token = string.Empty
                 };
-            }
-
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-
-            if (user == null)
-            {
-                return new LoginResult
-                {
-                    Success = false,
-                    Message = "El usuario no existe."
-                };
-            }
-
-            string hashPassword = SecurityHelper.Hash(request.Password);
-
-            if (hashPassword != user.Password)
-            {
-                return new LoginResult
-                {
-                    Success = false,
-                    Message = "La contraseña es incorrecta."
-                };
-            }
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_config["Jwt:Secret"]);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-            new Claim(ClaimTypes.Email, user.Email),
-            new Claim("UserId", user.Id.ToString())
-        }),
-                Expires = DateTime.UtcNow.AddMinutes(
-                    Convert.ToDouble(_config["Jwt:TokenExpirationMinutes"])
-                ),
-                Issuer = _config["Jwt:Issuer"],
-                Audience = _config["Jwt:Audience"],
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature
-                )
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return new LoginResult
-            {
-                Success = true,
-                Message = "Login exitoso.",
-                Token = tokenHandler.WriteToken(token)
-            };
+            }            
         }
 
     }

@@ -3,9 +3,9 @@ using Owner.Infrastructure.EF.Entities;
 
 namespace Owner.Infrastructure.EF.Context
 {
-    public class ApplicationDbContext : DbContext
+    public class OwnerDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public OwnerDbContext(DbContextOptions<OwnerDbContext> options) : base(options)
         {
         }
 

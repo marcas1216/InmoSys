@@ -1,6 +1,7 @@
 using InmoSys.Extensions;
 using InmoSys.Middleware;
 using Microsoft.EntityFrameworkCore;
+using Owner.Infrastructure.EF.Extensions;
 using User.Infrastructure.EF.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,7 @@ builder.Services.AddControllers();
 builder.Services.AddInmoSwagger(builder.Configuration);
 
 builder.Services.AddInfrastructure();
+builder.Services.AddOwnerContexts();
 
 var app = builder.Build();
 
