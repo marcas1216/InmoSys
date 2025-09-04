@@ -42,7 +42,6 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-
 // Middleware pipeline
 app.UseHttpsRedirection();
 

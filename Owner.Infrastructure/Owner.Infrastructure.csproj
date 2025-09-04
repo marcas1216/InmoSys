@@ -16,8 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Owner.Aplication\Owner.Aplication.csproj" />
     <ProjectReference Include="..\Owner.Entities\Owner.Entities.csproj" />
     <ProjectReference Include="..\User.Infrastructure\User.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BusinessRepositories\Interface\" />
   </ItemGroup>
 
 </Project>

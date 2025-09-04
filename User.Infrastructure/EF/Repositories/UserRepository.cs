@@ -84,12 +84,13 @@ namespace User.Infrastructure.EF.Repositories
                 };
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
+                var tokenString = tokenHandler.WriteToken(token);
 
                 return new LoginResult
                 {
                     Success = true,
                     Message = "Login exitoso.",
-                    Token = tokenHandler.WriteToken(token)
+                    Token = tokenString
                 };
             }
             catch (Exception ex)

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Owner.Aplication.Interface;
+using Owner.Infrastructure.BusinessRepositories.Read;
 using Owner.Infrastructure.EF.Context;
 using Owner.Infrastructure.EF.Interfaces;
 
@@ -14,7 +16,9 @@ namespace Owner.Infrastructure.EF.Extensions
                 var connectionService = sp.GetRequiredService<IConnectionRepository>();
                 string connectionString = connectionService.GetActiveConnectionAsync("OwnersServices").GetAwaiter().GetResult();
                 options.UseSqlServer(connectionString);
-            });                       
+            });
+
+            services.AddScoped< IOwnerService, OwnerRepository >();
 
             return services;
         }

@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Read\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Owner.Entities\Owner.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
