@@ -4,6 +4,8 @@ using User.Infrastructure.EF.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Properties.Aplication.Interface;
 using Properties.Infrastructure.BusinessRepositories.Read;
+using Properties.Aplication.Interface.Write;
+using Properties.Infrastructure.BusinessRepositories.Write;
 
 namespace Properties.Infrastructure.EF.Extensions
 {
@@ -21,7 +23,7 @@ namespace Properties.Infrastructure.EF.Extensions
             services.AddScoped<IPropertyTypeRepository, PropertyTypeRepository>();
             services.AddScoped<IPropertyStateRepository, PropertyStateRepository>();
             services.AddScoped<IPropertyImageRepository, PropertyImageRepository>();
-
+            services.AddScoped<IPropertyImageWriteRepository, PropertyImageWriteRepository>();
 
             return services;
         }

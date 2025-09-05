@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BusinessRepositories\Write\" />
     <Folder Include="EF\Interfaces\" />
     <Folder Include="EF\Repositories\" />
   </ItemGroup>
