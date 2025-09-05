@@ -1,5 +1,4 @@
 ﻿
-
 using Microsoft.EntityFrameworkCore;
 using Properties.Aplication.Interface;
 using Properties.Entities.Read;
@@ -19,6 +18,7 @@ namespace Properties.Infrastructure.BusinessRepositories.Read
         public async Task<IEnumerable<LoadPropertyTypes>> GetAllAsync()
         {
             return await _context.PropertyTypes
+                .AsNoTracking()
                 .Select(pt => new LoadPropertyTypes
                 {
                     ptyId = pt.Id,

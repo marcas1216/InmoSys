@@ -18,6 +18,7 @@ namespace Properties.Infrastructure.BusinessRepositories.Read
         public async Task<IEnumerable<LoadPropertyStates>> GetAllAsync()
         {
             return await _context.PropertyStates
+                .AsNoTracking()
                 .Select(ps => new LoadPropertyStates
                 {
                     pstId = ps.Id,

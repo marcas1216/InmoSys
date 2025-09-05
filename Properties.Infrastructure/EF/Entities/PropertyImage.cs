@@ -8,33 +8,29 @@ namespace Properties.Infrastructure.EF.Entities
     public class PropertyImage
     {
         [Key]
-        [Column("pild")]
+        [Column("piId")]
         public int Id { get; set; }
 
         [Required]
-        [Column("pPropertyId")]
+        [Column("piPropertyId")]
         public int PropertyId { get; set; }
 
         [Required]
-        [Column("pFile")]
+        [Column("piFile")]
         [MaxLength(1000)]
         public string File { get; set; }
 
         [Required]
-        [Column("pEnabled")]
+        [Column("piEnabled")]
         public bool Enabled { get; set; }
 
         [Required]
-        [Column("pRegisterDate")]
+        [Column("piRegisterDate")]
         public DateTime RegisterDate { get; set; }
 
         [Required]
-        [Column("pState")]
+        [Column("piState")]
         public int State { get; set; }
-
-        // Navigation property
-        [ForeignKey("PropertyId")]
-        public virtual Property Property { get; set; }
+        
     }
-
 }
