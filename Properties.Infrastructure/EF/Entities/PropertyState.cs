@@ -23,8 +23,6 @@ namespace Properties.Infrastructure.EF.Entities
         [Required]
         [Column("pstState")]
         public int State { get; set; }
-
-        // Navigation property
-        public virtual ICollection<Property> Properties { get; set; }
+        
     }
 }

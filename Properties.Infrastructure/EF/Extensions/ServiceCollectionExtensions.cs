@@ -19,6 +19,7 @@ namespace Properties.Infrastructure.EF.Extensions
             });
 
             services.AddScoped<IPropertyTypeRepository, PropertyTypeRepository>();
+            services.AddScoped<IPropertyStateRepository, PropertyStateRepository>();
 
             return services;
         }
