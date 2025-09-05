@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Owner.Entities\Owner.Entities.csproj" />
+    <Folder Include="Service\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Properties.Entities\Properties.Entities.csproj" />
   </ItemGroup>
 
 </Project>

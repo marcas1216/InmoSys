@@ -1,6 +1,4 @@
-﻿using Owner.Infrastructure.EF.Interfaces;
-using Owner.Infrastructure.EF.Repositories;
-using User.Infrastructure.EF.Interfaces;
+﻿using User.Infrastructure.EF.Interfaces;
 using User.Infrastructure.EF.Repositories;
 
 namespace InmoSys.Extensions

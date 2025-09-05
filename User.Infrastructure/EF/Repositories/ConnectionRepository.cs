@@ -1,11 +1,10 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using Owner.Entities.Read;
-using Owner.Infrastructure.EF.Helpers;
-using Owner.Infrastructure.EF.Interfaces;
 using User.Infrastructure.EF.Context;
+using User.Infrastructure.EF.Helpers;
+using User.Infrastructure.EF.Interfaces;
 
-namespace Owner.Infrastructure.EF.Repositories
+namespace User.Infrastructure.EF.Repositories
 {
     public class ConnectionRepository : IConnectionRepository
     {
@@ -13,7 +12,7 @@ namespace Owner.Infrastructure.EF.Repositories
 
         public ConnectionRepository(InmoSysCoreContext context)
         {
-            _context = context; 
+            _context = context;
         }
 
         public async Task<string?> GetActiveConnectionAsync(string serviceName)
@@ -28,7 +27,7 @@ namespace Owner.Infrastructure.EF.Repositories
 
             try
             {
-                var decryptedConnString = OwnerSecurityHelper.Decrypt(
+                var decryptedConnString = SecurityHelper.Decrypt(
                     connection.ConnectionString!,
                     connection.ServiceName
                 );
@@ -36,7 +35,7 @@ namespace Owner.Infrastructure.EF.Repositories
                 return decryptedConnString;
             }
             catch (Exception ex)
-            {                
+            {
                 throw new InvalidOperationException($"Error desencriptando la conexión {serviceName}: {ex.Message}", ex);
             }
         }

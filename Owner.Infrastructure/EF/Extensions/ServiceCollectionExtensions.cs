@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Owner.Aplication.Interface;
 using Owner.Infrastructure.BusinessRepositories.Read;
 using Owner.Infrastructure.EF.Context;
-using Owner.Infrastructure.EF.Interfaces;
+using User.Infrastructure.EF.Interfaces;
 
 namespace Owner.Infrastructure.EF.Extensions
 {

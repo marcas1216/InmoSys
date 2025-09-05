@@ -1,7 +1,5 @@
 ﻿
-using Owner.Entities.Read;
-
-namespace Owner.Infrastructure.EF.Interfaces
+namespace User.Infrastructure.EF.Interfaces
 {
     public interface IConnectionRepository
     {
