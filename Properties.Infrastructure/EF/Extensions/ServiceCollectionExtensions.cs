@@ -6,6 +6,7 @@ using Properties.Aplication.Interface;
 using Properties.Infrastructure.BusinessRepositories.Read;
 using Properties.Aplication.Interface.Write;
 using Properties.Infrastructure.BusinessRepositories.Write;
+using Properties.Aplication.Interface.Read;
 
 namespace Properties.Infrastructure.EF.Extensions
 {
@@ -24,6 +25,7 @@ namespace Properties.Infrastructure.EF.Extensions
             services.AddScoped<IPropertyStateRepository, PropertyStateRepository>();
             services.AddScoped<IPropertyImageRepository, PropertyImageRepository>();
             services.AddScoped<IPropertyImageWriteRepository, PropertyImageWriteRepository>();
+            services.AddScoped<IPropertyReadRepository, PropertyReadRepository>();
 
             return services;
         }

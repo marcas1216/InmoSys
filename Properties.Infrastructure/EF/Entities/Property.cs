@@ -1,5 +1,4 @@
 ﻿
-
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +9,7 @@ namespace Properties.Infrastructure.EF.Entities
     public class Property
     {
         [Key]
-        [Column("pld")]
+        [Column("pId")]
         public int Id { get; set; }
 
         [Required]
@@ -54,16 +53,6 @@ namespace Properties.Infrastructure.EF.Entities
 
         [Required]
         [Column("pState")]
-        public int State { get; set; }
-
-        // Navigation properties
-        [ForeignKey("PropertyTypeId")]
-        public virtual PropertyType PropertyType { get; set; }
-
-        [ForeignKey("PropertyStateId")]
-        public virtual PropertyState PropertyState { get; set; }
-
-        public virtual ICollection<PropertyImage> PropertyImages { get; set; }
-        public virtual ICollection<PropertyTrace> PropertyTraces { get; set; }
+        public int State { get; set; }               
     }
 }
