@@ -7,5 +7,6 @@ namespace Properties.Aplication.Interface.Write
     {
         Task<int> AddPropertyAsync(AddProperty property);
         Task<bool> UpdatePropertyAsync(int id, UpdateProperty property);
+        Task ChangePriceAsync(int id, ChangePrices changePrice);
     }
 }

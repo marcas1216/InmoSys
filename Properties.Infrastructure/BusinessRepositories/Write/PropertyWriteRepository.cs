@@ -59,5 +59,18 @@ namespace Properties.Infrastructure.BusinessRepositories.Write
 
             return true;
         }
+
+        public async Task ChangePriceAsync(int id, ChangePrices changePrice)
+        {
+            var entity = await _context.Properties.FirstOrDefaultAsync(p => p.Id == id);
+
+            if (entity == null)
+                throw new KeyNotFoundException($"Propiedad con Id {id} no encontrada");
+
+            entity.Price = changePrice.Price;
+
+            _context.Properties.Update(entity);
+            await _context.SaveChangesAsync();
+        }
     }
 }

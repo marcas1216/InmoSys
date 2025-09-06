@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Properties.Aplication.Interface.Write;
 using Properties.Entities.Write;
+using Properties.Infrastructure.BusinessRepositories.Write;
 
 namespace InmoSys.Controllers.Properties.Write
 {
@@ -37,6 +38,13 @@ namespace InmoSys.Controllers.Properties.Write
                 return NotFound(new { message = "Propiedad no encontrada" });
 
             return Ok(new { message = "Propiedad actualizada exitosamente" });
+        }
+
+        [HttpPut("{id}/price")]
+        public async Task<IActionResult> ChangePrice(int id, [FromBody] ChangePrices request)
+        {
+            await _propertyService.ChangePriceAsync(id, request);
+            return Ok(new { Message = $"Precio actualizado correctamente para la propiedad: {id}" });
         }
     }
 }
