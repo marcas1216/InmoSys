@@ -41,5 +41,23 @@ namespace Properties.Infrastructure.BusinessRepositories.Write
 
             return entity.Id; 
         }
+
+        public async Task<bool> UpdatePropertyAsync(int id, UpdateProperty request)
+        {
+            var property = await _context.Properties.FirstOrDefaultAsync(p => p.Id == id);
+            if (property == null) return false;
+                        
+            property.Name = request.Name;
+            property.Address = request.Address;
+            property.Price = request.Price;
+            property.CodeInternal = request.CodeInternal;
+            property.Year = request.Year;
+            property.OwnerId = request.OwnerId;
+            property.PropertyStateId = request.PropertyStateId;
+
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

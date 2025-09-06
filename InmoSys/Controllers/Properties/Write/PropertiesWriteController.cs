@@ -27,5 +27,16 @@ namespace InmoSys.Controllers.Properties.Write
             var newId = await _propertyService.AddPropertyAsync(request);
             return CreatedAtAction(nameof(AddProperty), new { id = newId }, newId);
         }
+
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<IActionResult> UpdateProperty(int id, [FromBody] UpdateProperty request)
+        {
+            var result = await _propertyService.UpdatePropertyAsync(id, request);
+            if (!result)
+                return NotFound(new { message = "Propiedad no encontrada" });
+
+            return Ok(new { message = "Propiedad actualizada exitosamente" });
+        }
     }
 }
