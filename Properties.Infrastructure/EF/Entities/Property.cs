@@ -40,16 +40,16 @@ namespace Properties.Infrastructure.EF.Entities
         public int OwnerId { get; set; }
 
         [Required]
-        [Column("pPropertyTypeld")]
+        [Column("pPropertyTypeId")]
         public int PropertyTypeId { get; set; }
 
         [Required]
         [Column("pPropertyStateId")]
         public int PropertyStateId { get; set; }
 
-        [Required]
         [Column("pRegisterDate")]
-        public DateTime RegisterDate { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime? RegisterDate { get; set; }
 
         [Required]
         [Column("pState")]

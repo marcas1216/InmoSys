@@ -26,6 +26,7 @@ namespace Properties.Infrastructure.EF.Extensions
             services.AddScoped<IPropertyImageRepository, PropertyImageRepository>();
             services.AddScoped<IPropertyImageWriteRepository, PropertyImageWriteRepository>();
             services.AddScoped<IPropertyReadRepository, PropertyReadRepository>();
+            services.AddScoped<IPropertyWriteRepository, PropertyWriteRepository>();
 
             return services;
         }
