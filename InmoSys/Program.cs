@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Owner.Infrastructure.EF.Extensions;
 using Properties.Infrastructure.EF.Extensions;
 using User.Infrastructure.EF.Context;
+using User.Infrastructure.EF.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,9 +17,6 @@ builder.Services.AddDbContext<InmoSysCoreContext>(options =>
 // CORS
 builder.Services.AddInmoCors(builder.Configuration);
 
-// JWT Auth
-builder.Services.AddInmoJwtAuthentication(builder.Configuration);
-
 // Controllers 
 builder.Services.AddControllers();
 
@@ -28,6 +26,12 @@ builder.Services.AddInmoSwagger(builder.Configuration);
 builder.Services.AddInfrastructure();
 builder.Services.AddOwnerContexts();
 builder.Services.AddPropertiesContexts();
+
+// JWT Auth
+var keyVaultRepository = builder.Services.BuildServiceProvider()
+    .GetRequiredService<IKeyVaultRepository>();
+
+await builder.Services.AddInmoJwtAuthentication(keyVaultRepository);
 
 var app = builder.Build();
 

@@ -1,22 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using User.Infrastructure.Constants;
+using User.Infrastructure.EF.Interfaces;
 
-namespace InmoSys.Extensions
+namespace InmoSys.Middleware
 {
-    public static class JwtExtensions
-    {
-        public static IServiceCollection AddInmoJwtAuthentication(this IServiceCollection services, IConfiguration configuration)
-        {
-            var jwt = configuration.GetSection("Jwt");
-            var secret = jwt.GetValue<string>("Secret");
-            var issuer = jwt.GetValue<string>("Issuer");
-            var audience = jwt.GetValue<string>("Audience");
-
-            if (string.IsNullOrWhiteSpace(secret))
-                throw new InvalidOperationException("La clave secreta JWT no está configurada en appsettings.json");
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+    public static class JwtAuthService
+    {       
+        public static async Task<IServiceCollection> AddInmoJwtAuthentication(this IServiceCollection services,
+            IKeyVaultRepository keyVaultRepository)
+        {            
+            var secret = await keyVaultRepository.GetJwtSecretAsync(JwtAuthConstants.JWT_MODULE);
+            var issuer = JwtAuthConstants.ISSUER;
+            var audience = JwtAuthConstants.AUDIENCE;
+                        
+            var key = new SymmetricSecurityKey(secret);
 
             services.AddAuthentication(options =>
             {
@@ -44,6 +42,6 @@ namespace InmoSys.Extensions
             });
 
             return services;
-        }
+        }       
     }
 }

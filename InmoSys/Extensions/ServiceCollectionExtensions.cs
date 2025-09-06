@@ -8,8 +8,10 @@ namespace InmoSys.Extensions
         public  static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {           
             services.AddScoped<IUserRepository, UserRepository>();            
-            services.AddScoped<IConnectionRepository, ConnectionRepository>();            
-
+            services.AddScoped<IConnectionRepository, ConnectionRepository>();
+            services.AddScoped<IKeyVaultRepository, KeyVaultRepository>();
+            services.AddScoped<IJwtAuthRepository, JwtAuthRepository>();
+            
             return services;
         }
     }

@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Moq;
 using User.Entities.Read;
+using User.Infrastructure.Constants;
 using User.Infrastructure.EF.Context;
 using User.Infrastructure.EF.Entities;
 using User.Infrastructure.EF.Helpers;
+using User.Infrastructure.EF.Interfaces;
 using User.Infrastructure.EF.Repositories;
 
 namespace User.Test
@@ -13,28 +16,25 @@ namespace User.Test
     {
         private InmoSysCoreContext _context;
         private IConfiguration _config;
+        private Mock<IJwtAuthRepository> _jwtAuthRepositoryMock;
 
         [SetUp]
         public void Setup()
         {
-            // Configuración fake JWT
-            var inMemorySettings = new Dictionary<string, string>
-            {
-                {"Jwt:Secret", "supersecretkeysupersecretkey123456"},
-                {"Jwt:TokenExpirationMinutes", "30"},
-                {"Jwt:Issuer", "testIssuer"},
-                {"Jwt:Audience", "testAudience"}
-            };
-            _config = new ConfigurationBuilder().AddInMemoryCollection(inMemorySettings).Build();
+            _jwtAuthRepositoryMock = new Mock<IJwtAuthRepository>();
+                        
+            _jwtAuthRepositoryMock
+                .Setup(j => j.GenerateToken(It.IsAny<string>(), It.IsAny<int>(), JwtAuthConstants.JWT_MODULE))
+                .Returns(Task.FromResult("fake-jwt-token"));
 
-            // DbContext en memoria
+            _config = new ConfigurationBuilder().Build();
+                        
             var options = new DbContextOptionsBuilder<InmoSysCoreContext>()
                 .UseInMemoryDatabase(databaseName: "TestDb")
                 .Options;
 
             _context = new InmoSysCoreContext(options);
-
-            // Limpiar datos previos y agregar usuarios de prueba
+                        
             _context.Users.RemoveRange(_context.Users);
             _context.Users.Add(new Users
             {
@@ -54,7 +54,7 @@ namespace User.Test
         [Test]
         public async Task LoginAsync_EmailOrPasswordEmpty_ReturnsError()
         {
-            var service = new UserRepository(_config, _context);
+            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object);
 
             var result = await service.LoginAsync(new UserLoginRequest
             {
@@ -69,7 +69,7 @@ namespace User.Test
         [Test]
         public async Task LoginAsync_UserNotFound_ReturnsError()
         {
-            var service = new UserRepository(_config, _context);
+            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object);
 
             var result = await service.LoginAsync(new UserLoginRequest
             {
@@ -84,7 +84,7 @@ namespace User.Test
         [Test]
         public async Task LoginAsync_WrongPassword_ReturnsError()
         {
-            var service = new UserRepository(_config, _context);
+            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object);
 
             var result = await service.LoginAsync(new UserLoginRequest
             {
@@ -99,7 +99,7 @@ namespace User.Test
         [Test]
         public async Task LoginAsync_ValidCredentials_ReturnsToken()
         {
-            var service = new UserRepository(_config, _context);
+            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object);
 
             var result = await service.LoginAsync(new UserLoginRequest
             {

@@ -16,11 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EF\Interfaces\" />
-    <Folder Include="EF\Repositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Properties.Aplication\Properties.Aplication.csproj" />
     <ProjectReference Include="..\Properties.Entities\Properties.Entities.csproj" />
     <ProjectReference Include="..\User.Infrastructure\User.Infrastructure.csproj" />

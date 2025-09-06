@@ -1,11 +1,8 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using User.Entities.Read;
+using User.Infrastructure.Constants;
 using User.Infrastructure.EF.Context;
 using User.Infrastructure.EF.Helpers;
 using User.Infrastructure.EF.Interfaces;
@@ -16,13 +13,15 @@ namespace User.Infrastructure.EF.Repositories
     {        
         private readonly IConfiguration _config;
         private readonly InmoSysCoreContext _context;
-        
-        public UserRepository(IConfiguration config
-            ,InmoSysCoreContext context)
+        private readonly IJwtAuthRepository _jwtAuthRepository;
 
-        {          
-            _config = config;
-            _context = context;               
+        public UserRepository(IConfiguration config
+            ,InmoSysCoreContext context
+            ,IJwtAuthRepository jwtAuthRepository
+            )
+
+        {
+            (_config, _context, _jwtAuthRepository) = (config, context, jwtAuthRepository);            
         }
 
         public async Task<LoginResult> LoginAsync(UserLoginRequest request)
@@ -62,29 +61,7 @@ namespace User.Infrastructure.EF.Repositories
                     };
                 }
 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.UTF8.GetBytes(_config["Jwt:Secret"]);
-
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new[]
-                    {
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim("UserId", user.Id.ToString())
-                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(
-                        Convert.ToDouble(_config["Jwt:TokenExpirationMinutes"])
-                    ),
-                    Issuer = _config["Jwt:Issuer"],
-                    Audience = _config["Jwt:Audience"],
-                    SigningCredentials = new SigningCredentials(
-                        new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature
-                    )
-                };
-
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                var tokenString = tokenHandler.WriteToken(token);
+                string tokenString = await _jwtAuthRepository.GenerateToken(user.Email, user.Id, JwtAuthConstants.JWT_MODULE);
 
                 return new LoginResult
                 {

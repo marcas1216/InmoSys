@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Properties", "4. Propert
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Infrastructure", "1.Infrastructure", "{EABE8A2E-DD9B-4D1B-A071-EC92DF4A3626}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Entities", "3.Entities", "{95F5A060-4141-41C5-A193-8CCC79534025}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Entities", "2.Entities", "{95F5A060-4141-41C5-A193-8CCC79534025}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.UnitTest", "4.UnitTest", "{23A1257E-9CC8-4293-AA62-2B59D5515843}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.UnitTest", "3.UnitTest", "{23A1257E-9CC8-4293-AA62-2B59D5515843}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "User.Test", "Users.Test\User.Test.csproj", "{286D5F03-CFB9-41A4-8CD1-E56423ADEA50}"
 EndProject
@@ -45,17 +45,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "User.Entities", "User.Entit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owner.Infrastructure", "Owner.Infrastructure\Owner.Infrastructure.csproj", "{8A36E4DF-C978-4B5C-976C-C4675ADB120E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Aplication", "2.Aplication", "{204E7885-DA3E-4116-A901-6E95C5BA4E74}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owner.Entities", "Owner.Entities\Owner.Entities.csproj", "{B494B687-4035-47F6-BF3B-B55EE61A76B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owner.Aplication", "Owner.Aplication\Owner.Aplication.csproj", "{51416636-4AD6-43EE-9D18-24C9D1B9D64E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owner.Aplication", "Owner.Aplication\Owner.Aplication.csproj", "{51416636-4AD6-43EE-9D18-24C9D1B9D64E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.Infrastructure", "Properties.Infrastructure\Properties.Infrastructure.csproj", "{56773E22-A0A2-4A03-B7BB-11D30E299712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.Infrastructure", "Properties.Infrastructure\Properties.Infrastructure.csproj", "{56773E22-A0A2-4A03-B7BB-11D30E299712}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.Aplication", "Properties.Aplication\Properties.Aplication.csproj", "{E852209A-AFB8-48FF-816E-19EF65633258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.Aplication", "Properties.Aplication\Properties.Aplication.csproj", "{E852209A-AFB8-48FF-816E-19EF65633258}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.Entities", "Properties.Entities\Properties.Entities.csproj", "{8AFE69DC-7895-42B4-87EF-B250632595FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.Entities", "Properties.Entities\Properties.Entities.csproj", "{8AFE69DC-7895-42B4-87EF-B250632595FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -129,7 +127,6 @@ Global
 		{A330E133-9049-4A20-9748-C4E979F9BAD0} = {EABE8A2E-DD9B-4D1B-A071-EC92DF4A3626}
 		{3CA335E6-2E57-47CE-AA19-729ADADA02A7} = {95F5A060-4141-41C5-A193-8CCC79534025}
 		{8A36E4DF-C978-4B5C-976C-C4675ADB120E} = {AA0615F0-357D-4E16-954F-5B3DB0A4F7D0}
-		{204E7885-DA3E-4116-A901-6E95C5BA4E74} = {1BCB79FB-9946-4DD9-898F-B95DC052EF9F}
 		{B494B687-4035-47F6-BF3B-B55EE61A76B4} = {80AD21F0-5DA9-4B0F-9DAB-BDFE6D6AD472}
 		{51416636-4AD6-43EE-9D18-24C9D1B9D64E} = {9A1CC836-6708-45A0-8305-1B57B8262218}
 		{56773E22-A0A2-4A03-B7BB-11D30E299712} = {B40EE794-5BBB-4C4D-8598-0C64B9B34E17}
