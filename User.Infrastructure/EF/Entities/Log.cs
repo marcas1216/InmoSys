@@ -13,7 +13,7 @@ namespace User.Infrastructure.EF.Entities
 
         [Required]
         [Column("lModule")]
-        public string Module { get; set; }
+        public string Module { get; set; } = string.Empty;  
 
         [Required]
         [Column("lMethod")]

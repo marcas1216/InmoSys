@@ -14,11 +14,11 @@ namespace Properties.Infrastructure.EF.Entities
         [Required]
         [Column("ptyName")]
         [MaxLength(200)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;    
 
         [Column("ptyDescription")]
         [MaxLength(500)]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [Required]
         [Column("ptyRegisterDate")]

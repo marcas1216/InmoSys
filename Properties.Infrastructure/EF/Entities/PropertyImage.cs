@@ -18,7 +18,7 @@ namespace Properties.Infrastructure.EF.Entities
         [Required]
         [Column("piFile")]
         [MaxLength(1000)]
-        public string File { get; set; }
+        public string File { get; set; } = string.Empty;    
 
         [Required]
         [Column("piEnabled")]

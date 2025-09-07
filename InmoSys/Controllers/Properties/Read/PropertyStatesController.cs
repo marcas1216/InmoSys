@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Properties.Aplication.Interface;
+using Properties.Aplication.Interface.Read;
 
 namespace InmoSys.Controllers.Properties.Read
 {

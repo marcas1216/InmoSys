@@ -64,6 +64,15 @@ namespace User.Infrastructure.EF.Repositories
                     };
                 }
 
+                if (string.IsNullOrWhiteSpace(user.Email))
+                {
+                    return new LoginResult
+                    {
+                        Success = false,
+                        Message = "El email no puede ser nulo o vacío"
+                    };                    
+                }
+
                 string tokenString = await _jwtAuthRepository.GenerateToken(user.Email, user.Id, JwtAuthConstants.JWT_MODULE);
 
                 var log = new AddLogs

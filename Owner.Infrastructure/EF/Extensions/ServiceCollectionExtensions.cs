@@ -14,7 +14,13 @@ namespace Owner.Infrastructure.EF.Extensions
             services.AddDbContext<OwnerDbContext>((sp, options) =>
             {
                 var connectionService = sp.GetRequiredService<IConnectionRepository>();
-                string connectionString = connectionService.GetActiveConnectionAsync("OwnersServices").GetAwaiter().GetResult();
+                string? connectionString = connectionService.GetActiveConnectionAsync("OwnersServices").GetAwaiter().GetResult();
+
+                if (string.IsNullOrWhiteSpace(connectionString))
+                {
+                    throw new InvalidOperationException("No se encontró una cadena de conexión válida para PropertiesServices.");
+                }
+
                 options.UseSqlServer(connectionString);
             });
 

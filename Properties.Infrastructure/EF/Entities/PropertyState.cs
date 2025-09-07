@@ -14,7 +14,7 @@ namespace Properties.Infrastructure.EF.Entities
         [Required]
         [Column("pstName")]
         [MaxLength(200)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;    
 
         [Required]
         [Column("pstRegisterDate")]

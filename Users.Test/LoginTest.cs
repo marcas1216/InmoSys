@@ -65,7 +65,7 @@ namespace User.Test
             });
 
             Assert.IsFalse(result.Success);
-            Assert.AreEqual("El correo y la contraseña son obligatorios.", result.Message);
+            Assert.That(result.Message, Is.EqualTo("El correo y la contraseña son obligatorios."));
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace User.Test
             });
 
             Assert.IsFalse(result.Success);
-            Assert.AreEqual("El usuario no existe.", result.Message);
+            Assert.That(result.Message, Is.EqualTo("El usuario no existe."));
         }
 
         [Test]
@@ -95,7 +95,7 @@ namespace User.Test
             });
 
             Assert.IsFalse(result.Success);
-            Assert.AreEqual("La contraseña es incorrecta.", result.Message);
+            Assert.That(result.Message, Is.EqualTo("La contraseña es incorrecta."));
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace User.Test
             });
 
             Assert.IsTrue(result.Success);
-            Assert.AreEqual("Login exitoso.", result.Message);
+            Assert.That(result.Message, Is.EqualTo("Login exitoso."));
             Assert.IsNotNull(result.Token);
         }
     }

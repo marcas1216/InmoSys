@@ -7,5 +7,6 @@ namespace User.Infrastructure.Constants
         public const string AUDIENCE = "InmoSysClients";      
         public const int TOKEN_EXPIRATION_MINUTES = 60;
         public const string JWT_MODULE = "User";
+        public const int NUMBER_OF_ITERATION = 100000;
     }
 }

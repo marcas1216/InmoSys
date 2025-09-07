@@ -19,7 +19,7 @@ namespace Properties.Infrastructure.EF.Entities
         [Required]
         [Column("phtName")]
         [MaxLength(400)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;    
 
         [Required]
         [Column("phtValue")]
@@ -41,10 +41,6 @@ namespace Properties.Infrastructure.EF.Entities
 
         [Required]
         [Column("ptrState")]
-        public int State { get; set; }
-
-        // Navigation property
-        [ForeignKey("PropertyId")]
-        public virtual Property Property { get; set; }
+        public int State { get; set; }               
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using User.Infrastructure.Constants;
 
 namespace User.Infrastructure.EF.Helpers
 {
@@ -14,14 +15,19 @@ namespace User.Infrastructure.EF.Helpers
                 return BitConverter.ToString(hash).Replace("-", "").ToUpper();
             }
         }
-        public static string Decrypt(string cipherTextBase64, string passPhrase)
+        public static string Decrypt(string ConnectionString, string ServiceName)
         {
-            using var aes = Aes.Create();
-            using var key = new Rfc2898DeriveBytes(passPhrase, Encoding.UTF8.GetBytes("MiSaltFijo123"), 10000);
+            using var aes = Aes.Create();         
+            using var key = new Rfc2898DeriveBytes(
+                ServiceName,
+                Encoding.UTF8.GetBytes(ServiceName),
+                JwtAuthConstants.NUMBER_OF_ITERATION,
+                HashAlgorithmName.SHA256
+            );
             aes.Key = key.GetBytes(32);
             aes.IV = key.GetBytes(16);
 
-            var cipherBytes = Convert.FromBase64String(cipherTextBase64);
+            var cipherBytes = Convert.FromBase64String(ConnectionString);
 
             using var decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
             using var ms = new MemoryStream(cipherBytes);

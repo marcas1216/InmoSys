@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using Properties.Aplication.Interface;
+using Properties.Aplication.Interface.Read;
 using Properties.Entities.Read;
 using Properties.Infrastructure.EF.Context;
 

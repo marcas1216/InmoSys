@@ -11,9 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Configs (Leídos desde appsettings)
 builder.Services.AddOptions();
 
-//builder.Services.AddDbContext<InmoSysCoreContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionInmoSysCore")));
-
 builder.Services.AddDbContextFactory<InmoSysCoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionInmoSysCore")));
 
@@ -30,7 +27,7 @@ builder.Services.AddInfrastructure();
 builder.Services.AddOwnerContexts();
 builder.Services.AddPropertiesContexts();
 
-// JWT Auth
+//// JWT Auth
 var keyVaultRepository = builder.Services.BuildServiceProvider()
     .GetRequiredService<IKeyVaultRepository>();
 
@@ -41,7 +38,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<InmoSysCoreContext>();
-    if (db.Database.CanConnect())
+    if (await db.Database.CanConnectAsync())
     {
         Console.WriteLine("Conexión a InmoSysCore establecida correctamente.");
     }

@@ -8,7 +8,6 @@ using Properties.Infrastructure.EF.Entities;
 using User.Entities.Write;
 using User.Infrastructure.Constants;
 using User.Infrastructure.EF.Interfaces;
-using User.Infrastructure.EF.Repositories;
 
 namespace Properties.Infrastructure.BusinessRepositories.Write
 {
@@ -58,18 +57,18 @@ namespace Properties.Infrastructure.BusinessRepositories.Write
             return entity.Id; 
         }
 
-        public async Task<bool> UpdatePropertyAsync(int id, UpdateProperty request)
+        public async Task<bool> UpdatePropertyAsync(int id, UpdateProperty propertyRequest)
         {
             var property = await _context.Properties.FirstOrDefaultAsync(p => p.Id == id);
             if (property == null) return false;
                         
-            property.Name = request.Name;
-            property.Address = request.Address;
-            property.Price = request.Price;
-            property.CodeInternal = request.CodeInternal;
-            property.Year = request.Year;
-            property.OwnerId = request.OwnerId;
-            property.PropertyStateId = request.PropertyStateId;
+            property.Name = propertyRequest.Name;
+            property.Address = propertyRequest.Address;
+            property.Price = propertyRequest.Price;
+            property.CodeInternal = propertyRequest.CodeInternal;
+            property.Year = propertyRequest.Year;
+            property.OwnerId = propertyRequest.OwnerId;
+            property.PropertyStateId = propertyRequest.PropertyStateId;
 
             await _context.SaveChangesAsync();
 

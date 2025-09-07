@@ -15,12 +15,12 @@ namespace Properties.Infrastructure.EF.Entities
         [Required]
         [Column("pName")]
         [MaxLength(400)]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;    
 
         [Required]
         [Column("pAddress")]
         [MaxLength(600)]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty; 
 
         [Required]
         [Column("pPrice")]
@@ -30,7 +30,7 @@ namespace Properties.Infrastructure.EF.Entities
         [Required]
         [Column("pCodeInternal")]
         [MaxLength(160)]
-        public string CodeInternal { get; set; }
+        public string CodeInternal { get; set; } = string.Empty;
 
         [Column("pYear")]
         public int? Year { get; set; }

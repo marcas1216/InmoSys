@@ -1,7 +1,6 @@
-﻿
-using Properties.Entities.Read;
+﻿using Properties.Entities.Read;
 
-namespace Properties.Aplication.Interface
+namespace Properties.Aplication.Interface.Read
 {
     public interface IPropertyImageRepository
     {

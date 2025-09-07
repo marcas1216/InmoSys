@@ -29,7 +29,7 @@ namespace User.Infrastructure.EF.Repositories
             {
                 var decryptedConnString = SecurityHelper.Decrypt(
                     connection.ConnectionString!,
-                    connection.ServiceName
+                    connection.ServiceName!
                 );
 
                 return decryptedConnString;
