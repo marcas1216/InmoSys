@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Entities", "3.Entities", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.UnitTest", "4.UnitTest", "{C9753BBB-42B1-4180-9A52-D8319D483C36}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.Test", "Properties.Test\Properties.Test.csproj", "{51C23852-96A3-4969-B971-6A5E28AF9735}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PropertiesTest", "Properties.Test\PropertiesTest.csproj", "{51C23852-96A3-4969-B971-6A5E28AF9735}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Presentation", "1.Presentation", "{0860C07D-FAB5-44A8-B4EC-0306BB8BACEA}"
 EndProject

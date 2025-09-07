@@ -27,6 +27,12 @@ namespace OwnerTest
             _repository = new OwnerRepository(_context);
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _context.Dispose();
+        }
+
         [Test]
         public async Task GetAllAsync_WhenNoOwners_ReturnsEmptyList()
         {
@@ -104,12 +110,6 @@ namespace OwnerTest
 
             // Assert
             Assert.That(result.Count(), Is.EqualTo(2));
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            _context.Dispose();
-        }
+        }        
     }
 }

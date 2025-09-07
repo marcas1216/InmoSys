@@ -1,5 +1,4 @@
 ﻿
-using Azure.Core;
 using Microsoft.EntityFrameworkCore;
 using Properties.Aplication.Interface.Write;
 using Properties.Entities.Write;
