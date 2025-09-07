@@ -11,7 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Configs (Leídos desde appsettings)
 builder.Services.AddOptions();
 
-builder.Services.AddDbContext<InmoSysCoreContext>(options =>
+//builder.Services.AddDbContext<InmoSysCoreContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionInmoSysCore")));
+
+builder.Services.AddDbContextFactory<InmoSysCoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionInmoSysCore")));
 
 // CORS

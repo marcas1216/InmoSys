@@ -1,7 +1,9 @@
 ﻿
+using Azure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using User.Entities.Read;
+using User.Entities.Write;
 using User.Infrastructure.Constants;
 using User.Infrastructure.EF.Context;
 using User.Infrastructure.EF.Helpers;
@@ -14,14 +16,15 @@ namespace User.Infrastructure.EF.Repositories
         private readonly IConfiguration _config;
         private readonly InmoSysCoreContext _context;
         private readonly IJwtAuthRepository _jwtAuthRepository;
+        private readonly ILogsRepository _logsRepository;
 
         public UserRepository(IConfiguration config
             ,InmoSysCoreContext context
             ,IJwtAuthRepository jwtAuthRepository
+            ,ILogsRepository logsRepository
             )
-
         {
-            (_config, _context, _jwtAuthRepository) = (config, context, jwtAuthRepository);            
+            (_config, _context, _jwtAuthRepository, _logsRepository) = (config, context, jwtAuthRepository, logsRepository);            
         }
 
         public async Task<LoginResult> LoginAsync(UserLoginRequest request)
@@ -62,6 +65,16 @@ namespace User.Infrastructure.EF.Repositories
                 }
 
                 string tokenString = await _jwtAuthRepository.GenerateToken(user.Email, user.Id, JwtAuthConstants.JWT_MODULE);
+
+                var log = new AddLogs
+                {
+                    LModule = LogConstants.USER_MODULE,
+                    LMethod = "LoginAsync",
+                    LRequest = request,
+                    LResponse = tokenString
+                };
+
+               _ = _logsRepository.AddLogAsync(log);
 
                 return new LoginResult
                 {

@@ -17,11 +17,13 @@ namespace User.Test
         private InmoSysCoreContext _context;
         private IConfiguration _config;
         private Mock<IJwtAuthRepository> _jwtAuthRepositoryMock;
+        private Mock<ILogsRepository> _iLogsRepository;
 
         [SetUp]
         public void Setup()
         {
             _jwtAuthRepositoryMock = new Mock<IJwtAuthRepository>();
+            _iLogsRepository = new Mock<ILogsRepository>();
                         
             _jwtAuthRepositoryMock
                 .Setup(j => j.GenerateToken(It.IsAny<string>(), It.IsAny<int>(), JwtAuthConstants.JWT_MODULE))
@@ -54,7 +56,7 @@ namespace User.Test
         [Test]
         public async Task LoginAsync_EmailOrPasswordEmpty_ReturnsError()
         {
-            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object);
+            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object, _iLogsRepository.Object);
 
             var result = await service.LoginAsync(new UserLoginRequest
             {
@@ -69,7 +71,7 @@ namespace User.Test
         [Test]
         public async Task LoginAsync_UserNotFound_ReturnsError()
         {
-            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object);
+            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object, _iLogsRepository.Object);
 
             var result = await service.LoginAsync(new UserLoginRequest
             {
@@ -84,7 +86,7 @@ namespace User.Test
         [Test]
         public async Task LoginAsync_WrongPassword_ReturnsError()
         {
-            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object);
+            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object, _iLogsRepository.Object);
 
             var result = await service.LoginAsync(new UserLoginRequest
             {
@@ -99,7 +101,7 @@ namespace User.Test
         [Test]
         public async Task LoginAsync_ValidCredentials_ReturnsToken()
         {
-            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object);
+            var service = new UserRepository(_config, _context, _jwtAuthRepositoryMock.Object, _iLogsRepository.Object);
 
             var result = await service.LoginAsync(new UserLoginRequest
             {

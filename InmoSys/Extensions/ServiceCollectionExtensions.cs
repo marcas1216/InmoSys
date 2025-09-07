@@ -11,6 +11,7 @@ namespace InmoSys.Extensions
             services.AddScoped<IConnectionRepository, ConnectionRepository>();
             services.AddScoped<IKeyVaultRepository, KeyVaultRepository>();
             services.AddScoped<IJwtAuthRepository, JwtAuthRepository>();
+            services.AddScoped<ILogsRepository, LogsRepository>();
             
             return services;
         }

@@ -8,12 +8,12 @@ namespace User.Infrastructure.EF.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("lid")]
+        [Column("lId")]
         public int Id { get; set; }
 
         [Required]
-        [Column("lUserId")]
-        public int UserId { get; set; }
+        [Column("lModule")]
+        public string Module { get; set; }
 
         [Required]
         [Column("lMethod")]
@@ -28,6 +28,7 @@ namespace User.Infrastructure.EF.Entities
 
         [Required]
         [Column("lRegisterDate")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime RegisterDate { get; set; }
 
         [Required]
