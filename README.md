@@ -23,10 +23,11 @@ La documentación técnica detallada del proyecto está disponible aquí:
 
 Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
-- [ ] .NET 5.0 SDK o superior
-- [ ] SQL Server Express LocalDB
-- [ ] SQL Server Management Studio (SSMS) - Opcional pero recomendado
-- [ ] Postman para pruebas de API
+- 🖥️ **IDE .NET** (Visual Studio o Visual Studio Code con extensión C#)
+- 🗄️ **SQL Server Express LocalDB**
+- 📊 **SQL Server Management Studio (SSMS)** 
+- 🔹 **Postman** para pruebas de API
+
 
 ---
 
