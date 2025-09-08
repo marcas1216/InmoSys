@@ -49,8 +49,8 @@ Primero, ejecute la petición de Login para obtener el token de autenticación, 
 
 📊 **Documentación Adjunta**
 
-| Documento            | Descripción                          | Archivo                                                |
-|---------------------|--------------------------------------|-------------------------------------------------------|
+| Documento            | Descripción                          | Archivo                                              |
+|--------------------- |--------------------------------------|------------------------------------------------------|
 | Diseño Técnico       | Arquitectura y diseño del sistema    | DT Gestión de Información Inmobiliaría.pdf           |
 | Pruebas Funcionales  | Casos de prueba y validaciones       | PF Gestión de Información Inmobiliaria - InmoSys.pdf |
 | Diccionario de Datos | Estructura completa de base de datos | Diccionario_Datos_InmoSys.pdf                        |
