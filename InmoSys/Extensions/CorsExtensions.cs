@@ -9,7 +9,7 @@
                 options.AddPolicy("InmoSysCors", policy =>
                 {                   
                     policy
-                        .WithOrigins("https://localhost:5001", "http://localhost:4200")
+                        .WithOrigins("https://localhost:7085")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();

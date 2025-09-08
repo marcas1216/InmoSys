@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Properties.Aplication.Interface.Read;
 using Properties.Entities.Read;
 using Properties.Infrastructure.EF.Context;
+using System.Diagnostics;
 
 namespace Properties.Infrastructure.BusinessRepositories.Read
 {
@@ -23,7 +24,8 @@ namespace Properties.Infrastructure.BusinessRepositories.Read
                 {
                     Id = p.Id,
                     Name = p.Name,
-                    Description = p.Address, 
+                    Description = p.Address,
+                    Price = p.Price,
                     RegisterDate = p.RegisterDate,
                     State = p.State
                 })
@@ -40,6 +42,7 @@ namespace Properties.Infrastructure.BusinessRepositories.Read
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Address,
+                    Price = p.Price,
                     RegisterDate = p.RegisterDate,
                     State = p.State
                 })
@@ -56,6 +59,7 @@ namespace Properties.Infrastructure.BusinessRepositories.Read
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Address,
+                    Price = p.Price,
                     RegisterDate = p.RegisterDate,
                     State = p.State
                 })
@@ -72,6 +76,7 @@ namespace Properties.Infrastructure.BusinessRepositories.Read
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Address,
+                    Price = p.Price,
                     RegisterDate = p.RegisterDate,
                     State = p.State
                 })

@@ -4,7 +4,7 @@ using Owner.Aplication.Interface;
 
 namespace InmoSys.Controllers.Owners.Read
 {
-    [Route("api/[controller]")]
+    [Route("api/owners")]
     [ApiController]
     public class OwnersReadController : ControllerBase
     {
@@ -15,6 +15,11 @@ namespace InmoSys.Controllers.Owners.Read
             _ownerService = ownerService;
         }
 
+        /// <summary>
+        /// Obtiene la lista de todos los propietarios registrados.
+        /// </summary>
+        /// <returns>Lista de propietarios</returns>
+        /// <response code="200">Retorna la lista de propietarios</response>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> GetAll()

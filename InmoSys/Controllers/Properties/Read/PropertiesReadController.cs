@@ -6,7 +6,7 @@ using Properties.Entities.Read;
 
 namespace InmoSys.Controllers.Properties.Read
 {
-    [Route("api/[controller]")]
+    [Route("api/properties")]
     [ApiController]
     public class PropertiesReadController : ControllerBase
     {
@@ -16,9 +16,13 @@ namespace InmoSys.Controllers.Properties.Read
         {
             _propertyService = propertyService;
         }
-              
+
+        /// <summary>
+        /// Obtiene la lista de todas las propiedades.
+        /// </summary>
+        /// <returns>Lista de propiedades</returns>
         [HttpGet]
-        [Authorize]
+        [Authorize]        
         public async Task<ActionResult<List<LoadProperty>>> GetProperties()
         {
             var result = await _propertyService.GetPropertiesAsync();
@@ -29,7 +33,13 @@ namespace InmoSys.Controllers.Properties.Read
             return Ok(result);
         }
 
-        [HttpGet("ByOwner/{ownerId}")]
+
+        /// <summary>
+        /// Obtiene la lista de propiedades filtradas por propietario.
+        /// </summary>
+        /// <param name="ownerId">ID del propietario</param>
+        /// <returns>Lista de propiedades del propietario</returns>
+        [HttpGet("owner/{ownerId}")]
         [Authorize]
         public async Task<ActionResult<List<LoadProperty>>> GetPropertiesByOwner(int ownerId)
         {
@@ -41,7 +51,12 @@ namespace InmoSys.Controllers.Properties.Read
             return Ok(result);
         }
 
-        [HttpGet("ByState/{propertyStateId}")]
+        /// <summary>
+        /// Obtiene la lista de propiedades filtradas por estado.
+        /// </summary>
+        /// <param name="propertyStateId">ID del estado de la propiedad</param>
+        /// <returns>Lista de propiedades según el estado</returns>
+        [HttpGet("state/{propertyStateId}")]
         [Authorize]
         public async Task<ActionResult<List<LoadProperty>>> GetPropertiesByState(int propertyStateId)
         {
@@ -53,7 +68,12 @@ namespace InmoSys.Controllers.Properties.Read
             return Ok(result);
         }
 
-        [HttpGet("ByType/{propertyTypeId}")]
+        /// <summary>
+        /// Obtiene la lista de propiedades filtradas por tipo.
+        /// </summary>
+        /// <param name="propertyTypeId">ID del tipo de propiedad</param>
+        /// <returns>Lista de propiedades según el tipo</returns>
+        [HttpGet("type/{propertyTypeId}")]
         [Authorize]
         public async Task<ActionResult<List<LoadProperty>>> GetPropertiesByType(int propertyTypeId)
         {

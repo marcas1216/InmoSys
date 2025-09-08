@@ -17,7 +17,7 @@ namespace InmoSys.Extensions
                 {
                     Title = "InmoSys API",
                     Version = "v1",
-                    Description = "API para la gestión de propietarios y propiedades en InmoSys"
+                    Description = "API para la gestión de propiedades en InmoSys"
                 });
 
                 //Configuración de JWT en Swagger
